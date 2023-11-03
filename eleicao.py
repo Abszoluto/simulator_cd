@@ -41,7 +41,7 @@ def simulate_failure(processes):
     print(f"Processo {process_to_fail.process_id} falhou! Número de encarnações: {process_to_fail.reincarnation_count}")
     return process_to_fail
 
-
+# Verifica se é necessário executar uma nova eleição de processos
 def is_new_election_needed (leader, processes):
     election_needed = False
     for process in processes:
@@ -49,6 +49,7 @@ def is_new_election_needed (leader, processes):
             election_needed = True
     return election_needed
 
+# Simula a recuperação de processos em caso de falha
 def process_recovery (processes):
     offline_processes = [process for process in processes if not(process.active)]
     if offline_processes != []:
@@ -66,10 +67,11 @@ def main():
     
     # Simulação de execução
     while (True):
-    # Simular falha de processo com uma probabilidade de 20%
+        # Simular falha de um processo com uma probabilidade de 20%
         if random.random() < 0.2:
             failed_process = simulate_failure(processes)
 
+        # Simular a recuperação de um processo com uma probabilidade de 50%
         if random.random() < 0.5:
             process_recovery(processes)
         
